@@ -5,7 +5,7 @@ import utils.ScannerInput.readNextInt
 import utils.ScannerInput.readNextLine
 import java.lang.System.exit
 
-private val noteAPI = NoteAPI()
+private val noteAPI = controllers.noteAPI()
 
 
 fun main(args: Array<String>) {
