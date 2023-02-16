@@ -42,6 +42,19 @@ class noteAPI {
     }
 
 
+    fun listActiveNotes(): String {
+    }
+
+    fun listArchivedNotes(): String {
+    }
+
+    fun numberOfArchivedNotes(): Int {
+        //helper method to determine how many archived notes there are
+    }
+
+    fun numberOfActiveNotes(): Int {
+        //helper method to determine how many active notes there are
+    }
 
 
 
