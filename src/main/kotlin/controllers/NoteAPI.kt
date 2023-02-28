@@ -43,16 +43,65 @@ class noteAPI {
 
 
     fun listActiveNotes(): String {
+        return if (notes.isEmpty()) {
+            "No notes stored"
+        }
+        else {
+            var listOfNotes = ""
+            for (i in notes.indices) {
+                if(notes.get(i).isNoteArchived)
+                listOfNotes += "${i}: ${notes[i]} \n"
+            }
+            listOfNotes
+        }
+
     }
 
     fun listArchivedNotes(): String {
+        return if (notes.isEmpty()) {
+            "No notes stored"
+        }
+        else {
+            var listOfNotes = ""
+            for (i in notes.indices) {
+                if(!notes.get(i).isNoteArchived)
+                    listOfNotes += "${i}: ${notes[i]} \n"
+            }
+            listOfNotes
+        }
     }
 
     fun numberOfArchivedNotes(): Int {
+        return if (notes.isEmpty()) {
+            0
+        }
+
+        else {
+            var numOfNotes = 0
+            for (i in notes.indices) {
+                if(notes.get(i).isNoteArchived)
+
+                    numOfNotes++
+            }
+            numOfNotes
+        }
         //helper method to determine how many archived notes there are
     }
 
     fun numberOfActiveNotes(): Int {
+        return if (notes.isEmpty()) {
+            0
+        }
+
+        else {
+            var numOfNotes = 0
+            for (i in notes.indices) {
+                if(!notes.get(i).isNoteArchived)
+
+                    numOfNotes++
+            }
+            numOfNotes
+        }
         //helper method to determine how many active notes there are
     }
 
