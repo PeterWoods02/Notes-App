@@ -72,36 +72,25 @@ class noteAPI {
     }
 
     fun numberOfArchivedNotes(): Int {
-        return if (notes.isEmpty()) {
-            0
-        }
 
-        else {
-            var numOfNotes = 0
-            for (i in notes.indices) {
-                if(notes.get(i).isNoteArchived)
-
-                    numOfNotes++
-            }
-            numOfNotes
+        var numOfNotes = 0
+        for (note in notes) {
+            if(note.isNoteArchived)
+                numOfNotes++
         }
-        //helper method to determine how many archived notes there are
+        return numOfNotes
+        //helper method to determine how many active notes there are
     }
 
     fun numberOfActiveNotes(): Int {
-        return if (notes.isEmpty()) {
-            0
-        }
 
-        else {
             var numOfNotes = 0
-            for (i in notes.indices) {
-                if(!notes.get(i).isNoteArchived)
 
+        for (note in notes) {
+                if(!note.isNoteArchived)
                     numOfNotes++
             }
-            numOfNotes
-        }
+            return numOfNotes
         //helper method to determine how many active notes there are
     }
 
@@ -135,7 +124,12 @@ class noteAPI {
         //helper method to determine how many notes there are of a specific priority
     }
 
-
+fun deleteNote(indexToDelete: Int): Note? {
+    return if(isValidListIndex(indexToDelete, notes)) {
+        notes.removeAt(indexToDelete)
+    }
+    else null
+}
 
 
 }
