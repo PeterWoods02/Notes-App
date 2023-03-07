@@ -1,7 +1,7 @@
 package models
 
-data class Note(val noteTitle: String,
+data class Note(var noteTitle: String,
                 var notePriority: Int,
-                val noteCategory: String,
-                val isNoteArchived :Boolean){
+                var noteCategory: String,
+                var isNoteArchived :Boolean){
 }
