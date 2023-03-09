@@ -53,7 +53,7 @@ class NoteAPI(serializerType: Serializer){
         else {
             var listOfNotes = ""
             for (i in notes.indices) {
-                if(notes.get(i).isNoteArchived)
+                if(!notes.get(i).isNoteArchived)
                 listOfNotes += "${i}: ${notes[i]} \n"
             }
             listOfNotes
@@ -68,12 +68,13 @@ class NoteAPI(serializerType: Serializer){
         else {
             var listOfNotes = ""
             for (i in notes.indices) {
-                if(!notes.get(i).isNoteArchived)
+                if(notes.get(i).isNoteArchived)
                     listOfNotes += "${i}: ${notes[i]} \n"
             }
             listOfNotes
         }
     }
+
 
     fun numberOfArchivedNotes(): Int {
 

@@ -30,9 +30,10 @@ fun mainMenu() : Int {
          > ----------------------------------
          > | NOTE MENU                      |
          > |   1) Add a note                |
-         > |   2) List all notes            |
+         > |   2) List notes                |
          > |   3) Update a note             |
          > |   4) Delete a note             |
+         > |   5) Archive a note            |
          > |   20) Save Notes               |
          > |   21) Load Notes               |
          > ----------------------------------
@@ -50,6 +51,7 @@ fun runMenu() {
             2  -> listNotes()
             3  -> updateNote()
             4  -> deleteNote()
+            5  -> archiveNote()
             20 -> save()
             21 -> load()
             0  -> exitApp()
@@ -76,7 +78,23 @@ fun addNote(){
 
 
 fun listNotes(){
-    println(noteAPI.listAllNotes())
+
+    println("1) List all notes")
+    println("2) List Active notes")
+    println("3) List Archived notes")
+    println("")
+    val listNotes = readNextInt("Select an option: ")
+    do {
+        val option = listNotes
+        when (option) {
+            1 -> noteAPI.listAllNotes()
+            2 -> noteAPI.listActiveNotes()
+            3 -> noteAPI.listArchivedNotes()
+
+            else -> println("Invalid option entered: ${option}")}
+        }while (true)
+
+
 
 }
 
@@ -144,6 +162,29 @@ fun load() {
 }
 
 
+fun archiveNote()  {
+    //logger.info { "updateNotes() function invoked" }
+    println(noteAPI.listActiveNotes())
+    if (noteAPI.numberOfActiveNotes() > 0) {
+        //only ask the user to choose the note if notes exist
+        val indexToUpdate = readNextInt("Enter the index of the note you wish to archive: ")
+        if  (noteAPI.isValidIndex(indexToUpdate)) //and is active
+             {
+
+            noteAPI.findNote(indexToUpdate) != null
+                val isNoteArchived = true
 
 
-//a
+                println("Archived Successful")
+
+        } else {
+            println("There are no notes for this index number")
+        }
+    }
+}
+
+
+
+
+
+
