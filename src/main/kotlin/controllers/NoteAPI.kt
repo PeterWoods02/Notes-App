@@ -24,21 +24,20 @@ class NoteAPI(serializerType: Serializer){
 
     fun listActiveNotes(): String =
         if  (notes.isEmpty()) "No notes stored"
-    else {
-        notes.filterNot {it.isNoteArchived}
-            notes.joinToString (separator = "\n") { note ->
+    else notes.filter {note -> !note.isNoteArchived}
+            .joinToString (separator = "\n") { note ->
                 notes.indexOf(note).toString() + ": " + note.toString()
 
-    }}
+    }
 
     fun listArchivedNotes(): String =
         if  (notes.isEmpty()) "No notes stored"
-        else {
-            notes.filter {it.isNoteArchived}
-            notes.joinToString (separator = "\n") { note ->
+        else notes.filter {note -> note.isNoteArchived}
+            .joinToString (separator = "\n") { note ->
                 notes.indexOf(note).toString() + ": " + note.toString()
 
-            }}
+            }
+
 
 
 
@@ -138,7 +137,6 @@ class NoteAPI(serializerType: Serializer){
         }
         return false
     }
-
 
 
     @Throws(Exception::class)

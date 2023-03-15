@@ -11,7 +11,8 @@ import java.io.File
 import java.lang.System.exit
 
 //private val noteAPI = NoteAPI(XMLSerializer(File("notes.xml")))
-private val noteAPI = NoteAPI(JSONSerializer(File("notes.json")))
+private val noteAPI = NoteAPI(XMLSerializer(File("notes.xml")))
+
 
 
 
@@ -178,7 +179,7 @@ fun listActiveNotes() {
 
 
 fun archiveNote() {
-    noteAPI.listActiveNotes()
+    println(noteAPI.listActiveNotes())
     if (noteAPI.numberOfActiveNotes() > 0) {
         //only ask the user to choose the note to archive if active notes exist
         val indexToArchive = readNextInt("Enter the index of the note to archive: ")
