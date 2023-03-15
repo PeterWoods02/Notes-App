@@ -72,7 +72,7 @@ fun addNote(){
     {
         println("Added Successfully")
     } else {
-        println("Add Failed")
+        println("Add Failed!")
     }
 }
 
