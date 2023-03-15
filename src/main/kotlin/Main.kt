@@ -77,26 +77,28 @@ fun addNote(){
 }
 
 
-fun listNotes(){
+fun listNotes() {
+    if (noteAPI.numberOfNotes() > 0) {
+        val option = readNextInt(
+            """
+                  > --------------------------------
+                  > |   1) View ALL notes          |
+                  > |   2) View ACTIVE notes       |
+                  > |   3) View ARCHIVED notes     |
+                  > --------------------------------
+         > ==>> """.trimMargin(">"))
 
-    println("1) List all notes")
-    println("2) List Active notes")
-    println("3) List Archived notes")
-    println("")
-    val listNotes = readNextInt("Select an option: ")
-    do {
-        val option = listNotes
         when (option) {
-            1 -> noteAPI.listAllNotes()
-            2 -> noteAPI.listActiveNotes()
-            3 -> noteAPI.listArchivedNotes()
-
-            else -> println("Invalid option entered: ${option}")}
-        }while (true)
-
-
-
+            1 -> listAllNotes();
+            2 -> listActiveNotes();
+            3 -> listArchivedNotes();
+            else -> println("Invalid option entered: " + option);
+        }
+    } else {
+        println("Option Invalid - No notes stored");
+    }
 }
+
 
 fun updateNote() {
     //logger.info { "updateNotes() function invoked" }
@@ -162,23 +164,29 @@ fun load() {
 }
 
 
-fun archiveNote()  {
-    //logger.info { "updateNotes() function invoked" }
+fun listAllNotes() {
+    println(noteAPI.listAllNotes())
+}
+
+fun listArchivedNotes() {
+    println(noteAPI.listArchivedNotes())
+}
+fun listActiveNotes() {
     println(noteAPI.listActiveNotes())
+}
+
+
+
+fun archiveNote() {
+    noteAPI.listActiveNotes()
     if (noteAPI.numberOfActiveNotes() > 0) {
-        //only ask the user to choose the note if notes exist
-        val indexToUpdate = readNextInt("Enter the index of the note you wish to archive: ")
-        if  (noteAPI.isValidIndex(indexToUpdate)) //and is active
-             {
-
-            noteAPI.findNote(indexToUpdate) != null
-                val isNoteArchived = true
-
-
-                println("Archived Successful")
-
+        //only ask the user to choose the note to archive if active notes exist
+        val indexToArchive = readNextInt("Enter the index of the note to archive: ")
+        //pass the index of the note to NoteAPI for archiving and check for success.
+        if (noteAPI.archiveNote(indexToArchive)) {
+            println("Archive Successful!")
         } else {
-            println("There are no notes for this index number")
+            println("Archive NOT Successful")
         }
     }
 }
