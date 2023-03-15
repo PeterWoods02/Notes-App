@@ -77,27 +77,20 @@ class NoteAPI(serializerType: Serializer){
 
 
     fun numberOfArchivedNotes(): Int {
-
-        var numOfNotes = 0
-        for (note in notes) {
-            if(note.isNoteArchived)
-                numOfNotes++
-        }
-        return numOfNotes
-        //helper method to determine how many active notes there are
+        return notes.stream()
+            .filter{note: Note -> note.isNoteArchived}
+            .count()
+            .toInt()
     }
+
 
     fun numberOfActiveNotes(): Int {
-
-            var numOfNotes = 0
-
-        for (note in notes) {
-                if(!note.isNoteArchived)
-                    numOfNotes++
-            }
-            return numOfNotes
-        //helper method to determine how many active notes there are
+        return notes.stream()
+            .filter{note: Note -> !note.isNoteArchived}
+            .count()
+            .toInt()
     }
+
 
 
     fun listNotesBySelectedPriority(priority: Int): String {
@@ -115,21 +108,15 @@ class NoteAPI(serializerType: Serializer){
     }
 
     fun numberOfNotesByPriority(priority: Int): Int {
-        return if (notes.isEmpty()) {
-            0
-        }
-        else {
-            var numOfNotes = 0
-            for (i in notes.indices) {
-                if(notes.get(i).notePriority == priority)
-                    numOfNotes++
-            }
-            numOfNotes
-        }
-        //helper method to determine how many notes there are of a specific priority
+        return notes.stream()
+            .filter(){note: Note -> note.notePriority == priority}
+            .count()
+            .toInt()
     }
 
-fun deleteNote(indexToDelete: Int): Note? {
+
+
+    fun deleteNote(indexToDelete: Int): Note? {
     return if(isValidListIndex(indexToDelete, notes)) {
         notes.removeAt(indexToDelete)
     }
