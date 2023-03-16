@@ -2,6 +2,8 @@ package controllers
 
 import models.Note
 import persistence.Serializer
+import java.util.Arrays.sort
+import java.util.Date
 
 class NoteAPI(serializerType: Serializer){
 
@@ -29,6 +31,11 @@ class NoteAPI(serializerType: Serializer){
     fun listArchivedNotes(): String =
         if  (numberOfArchivedNotes() == 0) "No archived notes stored"
         else formatListString(notes.filter { note -> note.isNoteArchived})
+
+
+
+    fun listByDate(): String = notes.sortBy { it.dateCreated}.toString()
+
 
 
 
