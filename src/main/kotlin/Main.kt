@@ -9,6 +9,7 @@ import utils.ScannerInput.readNextInt
 import utils.ScannerInput.readNextLine
 import java.io.File
 import java.lang.System.exit
+import java.time.LocalDate
 
 //private val noteAPI = NoteAPI(XMLSerializer(File("notes.xml")))
 private val noteAPI = NoteAPI(XMLSerializer(File("notes.xml")))
@@ -37,6 +38,7 @@ fun mainMenu() : Int {
          > |   5) Archive a note            |
          > ----------------------------------
          > |   6) Search Notes              |
+         > |   7) List by Date Created      |
          > ----------------------------------
          > |   20) Save Notes               |
          > |   21) Load Notes               |
@@ -57,6 +59,7 @@ fun runMenu() {
             4  -> deleteNote()
             5  -> archiveNote()
             6 -> searchNotes()
+            7 -> listDate()
             20 -> save()
             21 -> load()
             0  -> exitApp()
@@ -71,7 +74,8 @@ fun addNote(){
     val noteTitle = readNextLine("Enter a title for the note: ")
     val notePriority = readNextInt("Enter a priority (1-low, 2, 3, 4, 5-high): ")
     val noteCategory = readNextLine("Enter a category for the note: ")
-    val isAdded = noteAPI.add(Note(noteTitle, notePriority, noteCategory, false))
+    val noteDate = LocalDate.now()
+    val isAdded = noteAPI.add(Note(noteTitle, notePriority, noteCategory, false,noteDate))
 
     if (isAdded)
     {
@@ -115,9 +119,10 @@ fun updateNote() {
             val noteTitle = readNextLine("Enter a title for the note: ")
             val notePriority = readNextInt("Enter a priority (1-low, 2, 3, 4, 5-high): ")
             val noteCategory = readNextLine("Enter a category for the note: ")
+            val noteDate = LocalDate.now()
 
             //pass the index of the note and the new note details to NoteAPI for updating and check for success.
-            if (noteAPI.updateNote(indexToUpdate, Note(noteTitle, notePriority, noteCategory, false))){
+            if (noteAPI.updateNote(indexToUpdate, Note(noteTitle, notePriority, noteCategory, false, noteDate))){
                 println("Update Successful")
             } else {
                 println("Update Failed")
@@ -205,6 +210,11 @@ fun searchNotes(){
     }else{
         println(searchResults)
     }
+}
+
+fun listDate() {
+    noteAPI.listByDate()
+    println(noteAPI.listAllNotes())
 }
 
 
