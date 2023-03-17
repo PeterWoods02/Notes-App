@@ -232,12 +232,13 @@ class NoteAPITest {
             assertFalse(emptyNotes!!.archiveNote(0))
         }
 
-        /*@Test
+        @Test
         fun `archiving an already archived note returns false`(){
+            assertTrue(populatedNotes!!.archiveNote(2))
             assertTrue(populatedNotes!!.findNote(2)!!.isNoteArchived)
             assertFalse(populatedNotes!!.archiveNote(2))
         }
-*/
+
         @Test
         fun `archiving an active note that exists returns true and archives`() {
             assertFalse(populatedNotes!!.findNote(1)!!.isNoteArchived)

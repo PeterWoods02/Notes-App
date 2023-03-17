@@ -124,6 +124,7 @@ fun listNotesBySelectedPriority(priority: Int): String =
                 return true
             }
         }
+
         return false
     }
 
