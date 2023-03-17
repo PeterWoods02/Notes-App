@@ -75,9 +75,9 @@ class NoteAPI(serializerType: Serializer){
     fun numberOfActiveNotes(): Int = notes.count() { note: Note -> !note.isNoteArchived }
 
 //List by highest to the lowest priority
-    fun listByLeast(): String = notes.sortBy { it.notePriority}.toString()
+    fun listByLeast() = notes.sortBy { it.notePriority}.toString()
 //list by lowest to the highest priority
-    fun listByMost(): String = notes.sortByDescending { it.notePriority}.toString()
+    fun listByMost() = notes.sortByDescending { it.notePriority}.toString()
 
     fun numberOfNotesByPriority(priority: Int): Int = notes.count() {note: Note -> note.notePriority == priority}
 
