@@ -39,6 +39,7 @@ fun mainMenu() : Int {
          > ----------------------------------
          > |   6) Search Notes              |
          > |   7) List by Date Created      |
+         > |   8) List by Priority          |
          > ----------------------------------
          > |   20) Save Notes               |
          > |   21) Load Notes               |
@@ -60,6 +61,7 @@ fun runMenu() {
             5  -> archiveNote()
             6 -> searchNotes()
             7 -> listDate()
+            8 -> listByPriority()
             20 -> save()
             21 -> load()
             0  -> exitApp()
@@ -98,9 +100,9 @@ fun listNotes() {
          > ==>> """.trimMargin(">"))
 
         when (option) {
-            1 -> listAllNotes();
-            2 -> listActiveNotes();
-            3 -> listArchivedNotes();
+            1 -> listAllNotes()
+            2 -> listActiveNotes()
+            3 -> listArchivedNotes()
             else -> println("Invalid option entered: " + option);
         }
     } else {
@@ -111,7 +113,7 @@ fun listNotes() {
 
 fun updateNote() {
     //logger.info { "updateNotes() function invoked" }
-    listNotes()
+    noteAPI.listAllNotes()
     if (noteAPI.numberOfNotes() > 0) {
         //only ask the user to choose the note if notes exist
         val indexToUpdate = readNextInt("Enter the index of the note to update: ")
@@ -136,7 +138,7 @@ fun updateNote() {
 
 fun deleteNote(){
     //logger.info { "deleteNotes() function invoked" }
-    listNotes()
+    noteAPI.listAllNotes()
     if (noteAPI.numberOfNotes() > 0) {
         //only ask the user to choose the note to delete if the note exist
         val indexToDelete = readNextInt(
@@ -212,6 +214,28 @@ fun listDate() {
     noteAPI.listByDate()
     println(noteAPI.listAllNotes())
 }
+
+fun listByPriority(){
+    if (noteAPI.numberOfNotes() > 0) {
+        val option = readNextInt(
+            """
+                  > -------------------------------------------
+                  > |   1) List by Most - Least important     |
+                  > |   2) List by Least - Most important     |
+                  > -------------------------------------------
+         > ==>> """.trimMargin(">"))
+
+        when (option) {
+            1 -> noteAPI.listByMost()
+            2 -> noteAPI.listByLeast()
+            else -> println("Invalid option entered: $option");
+        }
+        println(noteAPI.listAllNotes())
+    } else {
+        println("Option Invalid - No notes stored");
+    }
+}
+
 
 
 

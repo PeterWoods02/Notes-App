@@ -2,6 +2,7 @@ package controllers
 
 import models.Note
 import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Nested
@@ -10,6 +11,7 @@ import persistence.JSONSerializer
 import persistence.XMLSerializer
 import java.io.File
 import java.time.LocalDate
+import kotlin.test.assertContains
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertNull
@@ -92,7 +94,70 @@ class NoteAPITest {
             assertTrue(notesString.contains("swim"))
             assertTrue(notesString.contains("summer holiday"))
         }
+
+        @Test
+        fun testListByLeast() {
+            // Create a list of notes
+            val notes = listOf(
+                swim,
+                learnKotlin,
+                summerHoliday,
+                testApp
+            )
+
+            // Sort the notes by priority in descending order
+            val expected = listOf(
+                summerHoliday,
+                swim,
+                testApp,
+                learnKotlin
+            ).toString()
+
+            // Call the listByMost function
+            val actual = notes.sortedBy { it?.notePriority }.toString()
+
+            // Compare the expected and actual results
+            assertEquals(expected, actual)
+        }
+
+        @Test
+        fun testListByMost() {
+            // Create a list of notes
+            val notes = listOf(
+                swim,
+                learnKotlin,
+                summerHoliday,
+                testApp
+            )
+
+            // Sort the notes by priority in descending order
+            val expected = listOf(
+                learnKotlin,
+                testApp,
+                swim,
+                summerHoliday
+            ).toString()
+
+            // Call the listByMost function
+            val actual = notes.sortedByDescending { it?.notePriority }.toString()
+
+            // Compare the expected and actual results
+            assertEquals(expected, actual)
+        }
+
+
+
+        @Test
+        fun numberOfNotesByPriorityCalculatedCorrectly() {
+            assertEquals(1, populatedNotes!!.numberOfNotesByPriority(1))
+            assertEquals(0, populatedNotes!!.numberOfNotesByPriority(2))
+            assertEquals(1, populatedNotes!!.numberOfNotesByPriority(3))
+            assertEquals(2, populatedNotes!!.numberOfNotesByPriority(4))
+            assertEquals(1, populatedNotes!!.numberOfNotesByPriority(5))
+            assertEquals(0, emptyNotes!!.numberOfNotesByPriority(1))
+        }
     }
+
     @Nested
     inner class DeleteNotes {
 
