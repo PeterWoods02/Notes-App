@@ -74,14 +74,10 @@ class NoteAPI(serializerType: Serializer){
 
     fun numberOfActiveNotes(): Int = notes.count() { note: Note -> !note.isNoteArchived }
 
-//change to lambdas
-fun listNotesBySelectedPriority(priority: Int): String =
-    if (notes.isEmpty()) "No notes stored"
-    else {
-        val listOfNotes = formatListString(notes.filter{ note -> note.notePriority == priority})
-        if (listOfNotes.equals("")) "No notes with priority: $priority"
-        else "${numberOfNotesByPriority(priority)} notes with priority $priority: $listOfNotes"
-    }
+//List by highest to the lowest priority
+    fun listByLeast(): String = notes.sortBy { it.notePriority}.toString()
+//list by lowest to the highest priority
+    fun listByMost(): String = notes.sortByDescending { it.notePriority}.toString()
 
     fun numberOfNotesByPriority(priority: Int): Int = notes.count() {note: Note -> note.notePriority == priority}
 

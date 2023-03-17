@@ -226,10 +226,11 @@ fun listByPriority(){
          > ==>> """.trimMargin(">"))
 
         when (option) {
-            1 -> listByPriority()
-            2 -> listActiveNotes()
+            1 -> noteAPI.listByMost()
+            2 -> noteAPI.listByLeast()
             else -> println("Invalid option entered: $option");
         }
+        println(noteAPI.listAllNotes())
     } else {
         println("Option Invalid - No notes stored");
     }
