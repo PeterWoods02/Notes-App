@@ -40,6 +40,7 @@ fun mainMenu() : Int {
          > |   6) Search Notes              |
          > |   7) List by Date Created      |
          > |   8) List by Priority          |
+         > |   9) Count notes in category   |
          > ----------------------------------
          > |   20) Save Notes               |
          > |   21) Load Notes               |
@@ -62,6 +63,7 @@ fun runMenu() {
             6 -> searchNotes()
             7 -> listDate()
             8 -> listByPriority()
+            9 -> countCategory()
             20 -> save()
             21 -> load()
             0  -> exitApp()
@@ -236,6 +238,13 @@ fun listByPriority(){
     } else {
         println("Option Invalid - No notes stored");
     }
+}
+
+
+//count number of notes in each category
+fun countCategory(){
+println(noteAPI.numberOfNotesByCategory())
+
 }
 
 
