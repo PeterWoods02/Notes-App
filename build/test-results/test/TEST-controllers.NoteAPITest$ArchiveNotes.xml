@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="controllers.NoteAPITest$ArchiveNotes" tests="3" skipped="0" failures="0" errors="0" timestamp="2023-03-17T18:44:02" hostname="LAPTOP-3QHT0SCT" time="0.002">
-  <properties/>
-  <testcase name="archiving an active note that exists returns true and archives()" classname="controllers.NoteAPITest$ArchiveNotes" time="0.001"/>
-  <testcase name="archiving a note that does not exist returns false()" classname="controllers.NoteAPITest$ArchiveNotes" time="0.001"/>
-  <testcase name="archiving an already archived note returns false()" classname="controllers.NoteAPITest$ArchiveNotes" time="0.0"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
