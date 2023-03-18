@@ -29,11 +29,11 @@ class NoteAPITest {
 
     @BeforeEach
     fun setup(){
-        learnKotlin = Note("Learning Kotlin", 5, "College", false, LocalDate.now())
-        summerHoliday = Note("Summer Holiday to France", 1, "Holiday", false,LocalDate.now())
-        codeApp = Note("Code App", 4, "Work", false,LocalDate.now())
-        testApp = Note("Test App", 4, "Work", false,LocalDate.now())
-        swim = Note("Swim - Pool", 3, "Hobby", false,LocalDate.now())
+        learnKotlin = Note("Learning Kotlin", 5, "College", false, LocalDate.of(2022,10,11))
+        summerHoliday = Note("Summer Holiday to France", 1, "Holiday", false,LocalDate.of(2021,6,22))
+        codeApp = Note("Code App", 4, "Work", false,LocalDate.of(2022,5,23))
+        testApp = Note("Test App", 4, "Work", false,LocalDate.of(2021,4,30))
+        swim = Note("Swim - Pool", 3, "Hobby", false,LocalDate.of(2022,12,13))
 
         //adding 5 Note to the notes api
         populatedNotes!!.add(learnKotlin!!)
@@ -139,10 +139,38 @@ class NoteAPITest {
             ).toString()
 
             // Call the listByMost function
+            val actual = notes.sortedBy { it?.dateCreated }.toString()
+
+            // Compare the expected and actual results
+            assertEquals(expected, actual)
+        }
+
+        @Test
+        fun testListByDate(){
+            // Create a list of notes
+            val notes = listOf(
+                swim,
+                learnKotlin,
+                summerHoliday,
+                testApp,
+                codeApp
+            )
+
+            // Sort the notes by priority in descending order
+            val expected = listOf(
+                learnKotlin,
+                testApp,
+                codeApp,
+                swim,
+                summerHoliday
+            ).toString()
+
+            // Call the listByMost function
             val actual = notes.sortedByDescending { it?.notePriority }.toString()
 
             // Compare the expected and actual results
             assertEquals(expected, actual)
+
         }
 
 
