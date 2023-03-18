@@ -87,7 +87,7 @@ fun addNote(){
     }
 }
 
-
+//lists notes and displays option
 fun listNotes() {
     if (noteAPI.numberOfNotes() > 0) {
         val option = readNextInt(
@@ -110,7 +110,7 @@ fun listNotes() {
     }
 }
 
-
+//updates note
 fun updateNote() {
     //logger.info { "updateNotes() function invoked" }
     noteAPI.listAllNotes()
@@ -135,7 +135,7 @@ fun updateNote() {
     }
 }
 
-
+//delete note
 fun deleteNote(){
     //logger.info { "deleteNotes() function invoked" }
     noteAPI.listAllNotes()
@@ -199,7 +199,7 @@ fun archiveNote() {
     }
 }
 
-
+//takes user input and searches for note title
 fun searchNotes(){
     val searchTitle = readNextLine("Enter Title to search By: ")
     val searchResults = noteAPI.searchByTitle(searchTitle)
@@ -210,11 +210,13 @@ fun searchNotes(){
     }
 }
 
+//list by newest made notes to oldest
 fun listDate() {
     noteAPI.listByDate()
     println(noteAPI.listAllNotes())
 }
 
+//list by priority of notes
 fun listByPriority(){
     if (noteAPI.numberOfNotes() > 0) {
         val option = readNextInt(
