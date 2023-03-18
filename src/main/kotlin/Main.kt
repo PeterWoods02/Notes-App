@@ -111,7 +111,7 @@ fun listNotes() {
 //updates note
 fun updateNote() {
     //logger.info { "updateNotes() function invoked" }
-    noteAPI.listAllNotes()
+    println(noteAPI.listAllNotes())
     if (noteAPI.numberOfNotes() > 0) {
         //only ask the user to choose the note if notes exist
         val indexToUpdate = readNextInt("Enter the index of the note to update: ")
@@ -136,7 +136,7 @@ fun updateNote() {
 //delete note
 fun deleteNote(){
     //logger.info { "deleteNotes() function invoked" }
-    noteAPI.listAllNotes()
+    println(noteAPI.listAllNotes())
     if (noteAPI.numberOfNotes() > 0) {
         //only ask the user to choose the note to delete if the note exist
         val indexToDelete = readNextInt(
@@ -254,7 +254,7 @@ fun countPriority() {
          > ==>> """.trimMargin(">")
         )
 
-        println("${noteAPI.numberOfNotesByPriority(option)} note/notes with Priority $option")
+        println("${noteAPI.numberOfNotesByPriority(option)} note/notes with a priority of $option")
     }
 }
 
