@@ -1,15 +1,11 @@
 import controllers.NoteAPI
 import models.Note
-import mu.KotlinLogging
-import persistence.JSONSerializer
-import persistence.Serializer
 import persistence.XMLSerializer
-import utils.ScannerInput
 import utils.ScannerInput.readNextInt
 import utils.ScannerInput.readNextLine
 import java.io.File
-import java.lang.System.exit
 import java.time.LocalDate
+import kotlin.system.exitProcess
 
 //private val noteAPI = NoteAPI(XMLSerializer(File("notes.xml")))
 private val noteAPI = NoteAPI(XMLSerializer(File("notes.xml")))
@@ -18,15 +14,13 @@ private val noteAPI = NoteAPI(XMLSerializer(File("notes.xml")))
 
 
 
-fun main(args: Array<String>) {
+fun main() {
     runMenu()
 }
 
 
-private val logger = KotlinLogging.logger {}
-
 fun mainMenu() : Int {
-    return ScannerInput.readNextInt(""" 
+    return readNextInt(""" 
          > ----------------------------------
          > |        NOTE KEEPER APP         |
          > ----------------------------------
@@ -55,8 +49,7 @@ fun mainMenu() : Int {
 
 fun runMenu() {
     do {
-        val option = mainMenu()
-        when (option) {
+        when (val option = mainMenu()) {
             1  -> addNote()
             2  -> listNotes()
             3  -> updateNote()
@@ -70,7 +63,7 @@ fun runMenu() {
             20 -> save()
             21 -> load()
             0  -> exitApp()
-            else -> println("Invalid option entered: ${option}")
+            else -> println("Invalid option entered: $option")
         }
     } while (true)
 }
@@ -108,10 +101,10 @@ fun listNotes() {
             1 -> listAllNotes()
             2 -> listActiveNotes()
             3 -> listArchivedNotes()
-            else -> println("Invalid option entered: " + option);
+            else -> println("Invalid option entered: $option")
         }
     } else {
-        println("Option Invalid - No notes stored");
+        println("Option Invalid - No notes stored")
     }
 }
 
@@ -161,7 +154,7 @@ fun deleteNote(){
 
 fun exitApp(){
     println("Exiting...bye")
-    exit(0)
+    exitProcess(0)
 }
 
 fun save() {
@@ -235,11 +228,11 @@ fun listByPriority(){
         when (option) {
             1 -> noteAPI.listByMost()
             2 -> noteAPI.listByLeast()
-            else -> println("Invalid option entered: $option");
+            else -> println("Invalid option entered: $option")
         }
         println(noteAPI.listAllNotes())
     } else {
-        println("Option Invalid - No notes stored");
+        println("Option Invalid - No notes stored")
     }
 }
 

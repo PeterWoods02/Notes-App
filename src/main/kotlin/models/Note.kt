@@ -1,7 +1,6 @@
 package models
 
 import java.time.LocalDate
-import java.util.Date
 
 data class Note(
     var noteTitle: String,
@@ -10,5 +9,3 @@ data class Note(
     var isNoteArchived:Boolean,
     var dateCreated: LocalDate
 )
-{
-}

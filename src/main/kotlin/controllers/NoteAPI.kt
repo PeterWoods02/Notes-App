@@ -2,8 +2,7 @@ package controllers
 
 import models.Note
 import persistence.Serializer
-import java.util.Arrays.sort
-import java.util.Date
+
 
 class NoteAPI(serializerType: Serializer){
 
@@ -68,7 +67,7 @@ class NoteAPI(serializerType: Serializer){
     fun numberOfArchivedNotes(): Int = notes.count { note: Note -> note.isNoteArchived }
 
     //returns number of notes that are not archived
-    fun numberOfActiveNotes(): Int = notes.count() { note: Note -> !note.isNoteArchived }
+    fun numberOfActiveNotes(): Int = notes.count { note: Note -> !note.isNoteArchived }
 
 //List by highest to the lowest priority
     fun listByLeast() = notes.sortBy { it.notePriority}.toString()
@@ -76,7 +75,7 @@ class NoteAPI(serializerType: Serializer){
     fun listByMost() = notes.sortByDescending { it.notePriority}.toString()
 
     //returns number of notes based on priority inputed
-    fun numberOfNotesByPriority(priority: Int): Int = notes.count() {note: Note -> note.notePriority == priority}
+    fun numberOfNotesByPriority(priority: Int): Int = notes.count { note: Note -> note.notePriority == priority}
 
 
 
@@ -106,7 +105,7 @@ class NoteAPI(serializerType: Serializer){
 
 //returns if user input is a valid index
     fun isValidIndex(index: Int) :Boolean{
-        return isValidListIndex(index, notes);
+        return isValidListIndex(index, notes)
     }
 //archive a note
     fun archiveNote(indexToArchive: Int): Boolean {
