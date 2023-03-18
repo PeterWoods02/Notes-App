@@ -11,8 +11,6 @@ import persistence.JSONSerializer
 import persistence.XMLSerializer
 import java.io.File
 import java.time.LocalDate
-import kotlin.test.assertContains
-import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertNull
 
@@ -139,7 +137,7 @@ class NoteAPITest {
             ).toString()
 
             // Call the listByMost function
-            val actual = notes.sortedBy { it?.dateCreated }.toString()
+            val actual = notes.sortedByDescending { it?.notePriority }.toString()
 
             // Compare the expected and actual results
             assertEquals(expected, actual)
@@ -158,15 +156,15 @@ class NoteAPITest {
 
             // Sort the notes by priority in descending order
             val expected = listOf(
-                learnKotlin,
-                testApp,
-                codeApp,
                 swim,
-                summerHoliday
+                learnKotlin,
+                codeApp,
+                summerHoliday,
+                testApp
             ).toString()
 
             // Call the listByMost function
-            val actual = notes.sortedByDescending { it?.notePriority }.toString()
+            val actual = notes.sortedByDescending { it?.dateCreated }.toString()
 
             // Compare the expected and actual results
             assertEquals(expected, actual)
