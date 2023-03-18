@@ -138,7 +138,20 @@ class NoteAPI(serializerType: Serializer){
             .joinToString (separator = "\n") { note ->
                 notes.indexOf(note).toString() + ": " + note.toString() }
 
+
+
+    //count number of notes in each category
+    fun numberOfNotesByCategory(): String {
+        val categoriesMap = notes.groupingBy { it.noteCategory.lowercase() }.eachCount()
+        return categoriesMap.entries.joinToString("\n") { "${it.key}: ${it.value}" }
+    }
+
+
+
+
+
 }
+
 
 
 

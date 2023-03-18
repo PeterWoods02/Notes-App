@@ -243,6 +243,7 @@ fun listByPriority(){
 
 //count number of notes in each category
 fun countCategory(){
+println(noteAPI.numberOfNotesByCategory())
 
 }
 
