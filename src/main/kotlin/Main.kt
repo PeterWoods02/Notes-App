@@ -40,10 +40,12 @@ fun mainMenu() : Int {
          > |   6) Search Notes              |
          > |   7) List by Date Created      |
          > |   8) List by Priority          |
-         > |   9) Count notes in category   |
+         > ---------------------------------- 
+         > |   9) Count notes per category  |
+         > |  10) Count notes by priority   |
          > ----------------------------------
-         > |   20) Save Notes               |
-         > |   21) Load Notes               |
+         > |  20) Save Notes                |
+         > |  21) Load Notes                |
          > ----------------------------------
          > |   0) Exit                      |
          > ----------------------------------
@@ -64,6 +66,7 @@ fun runMenu() {
             7 -> listDate()
             8 -> listByPriority()
             9 -> countCategory()
+            10 -> countPriority()
             20 -> save()
             21 -> load()
             0  -> exitApp()
@@ -245,6 +248,21 @@ fun listByPriority(){
 fun countCategory(){
 println(noteAPI.numberOfNotesByCategory())
 
+}
+
+//count notes on inputed priority
+fun countPriority() {
+    if (noteAPI.numberOfNotes() > 0) {
+        val option = readNextInt(
+            """
+                  > --------------------------------------------
+                  > | Enter priority 1-5 you wish to search by |
+                  > --------------------------------------------
+         > ==>> """.trimMargin(">")
+        )
+
+        println("${noteAPI.numberOfNotesByPriority(option)} note/notes with Priority $option")
+    }
 }
 
 
